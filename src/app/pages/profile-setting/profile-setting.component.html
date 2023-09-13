@@ -1,0 +1,224 @@
+<div class="page-wrapper toggled">
+    <main class="page-content bg-light">
+        <div class="container-fluid">
+            <div class="layout-specing">
+                <div class="d-md-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 text-uppercase">Profile Setting</h5>
+                    <nav aria-label="breadcrumb" class="d-inline-block mt-2 mt-sm-0">
+                        <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
+                            <li class="breadcrumb-item text-capitalize"><a (click)="home()">Dashboard</a>
+                            </li>
+                            <li class="breadcrumb-item text-capitalize active" aria-current="page">Profile </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <div class="card rounded shadow">
+                            <div class="d-flex flex-column align-items-center text-center px-3 py-3">
+                                <div class="mt-4 text-md-start text-center d-flex flex-column align-items-center">
+                                    <img style="width: 100%;height: 100%;"
+                                        src="https://us.123rf.com/450wm/nexusby/nexusby1810/nexusby181000286/111362910-default-avatar-placeholder-profile-icon-male.jpg?ver=6"
+                                        class="avatar avatar-medium rounded-circle shadow" alt="">
+                                </div>
+                                <div class="mb-3 mt-2 d-flex">
+                                    <!-- <button class="btn btn-primary me-2">Change
+                                        Picture</button> -->
+                                    <button class="btn btn-primary" (click)="openModal(password)">Change
+                                        Password</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9 border-right">
+                        <div class="card border-0 rounded shadow img">
+                            <div class="the-fieldset">
+                                <legend class="the-legend"><strong>Personal Details</strong></legend>
+                            </div>
+                            <div class="card-body">
+                                <form action="" [formGroup]="profileForm">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Full Name</label>
+                                                <div class="form-icon position-relative">
+                                                    <i data-feather="user" class="fea icon-sm icons"></i>
+                                                    <input name="name" id="first" type="text" class="form-control ps-2"
+                                                        placeholder="First Name" readonly
+                                                        formControlName="fullName">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <div class="form-icon position-relative">
+                                                    <i data-feather="mail" class="fea icon-sm icons"></i>
+                                                    <input name="email" id="email" type="email"
+                                                        class="form-control ps-2"
+                                                        placeholder="Your email" formControlName="email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Role</label>
+                                                <div class="form-icon position-relative">
+                                                    <i data-feather="bookmark" class="fea icon-sm icons"></i>
+                                                    <input name="name" id="occupation" type="text"
+                                                        class="form-control ps-2" readonly
+                                                        placeholder="Role" formControlName="roleName">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Phone No</label>
+                                                <div class="form-icon position-relative">
+                                                    <i data-feather="phone" class="fea icon-sm icons"></i>
+                                                    <input name="number" id="number" type="number"
+                                                        class="form-control ps-5"
+                                                        placeholder="Phone" formControlName="phoneNum">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" formGroupName="permanent">
+                                        <div class="col-12 col-sm-12 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Country</label>
+                                                <div class="form-icon position-relative">
+                                                    <ng-select class="custom"
+                                                        (change)="stateGetCountryId($event, 'fromHTMLpermanent')"
+                                                        placeholder="Select Country" formControlName="countryId">
+                                                        <ng-option class="option" *ngFor="let country of countryGet"
+                                                            [value]="country.id">{{country.name}}</ng-option>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">State</label>
+                                                <div class="form-icon position-relative">
+                                                    <ng-select class="custom" placeholder="Select State"
+                                                        (change)="districtGetStateId($event, 'fromHTMLpermanent')"
+                                                        formControlName="stateId">
+                                                        <ng-option class="option" *ngFor="let state of perm_State_Arr"
+                                                            [value]="state.id">{{state.name}}</ng-option>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">District</label>
+                                                <div class="form-icon position-relative">
+                                                    <ng-select class="custom" placeholder="Select District"
+                                                        formControlName="districtId">
+                                                        <ng-option class="option" *ngFor="let district of perm_Dist_Arr"
+                                                            [value]="district.id">{{district.name}}</ng-option>
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Address</label>
+                                                <div class="form-icon position-relative">
+                                                    <textarea name="text" class="form-control ps-5"
+                                                        placeholder="Address" formControlName="address"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 text-end my-2">
+                                        <button class="btn btn-primary" (click)="update()">Update</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<ng-template #password let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title text-uppercase">Change Password</h5>
+        <button class="close fa fa-xmark" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <form action="" [formGroup]="profileSettingForm">
+                <div class="col-lg-12">
+                    <div class="mb">
+                        <label class="form-label">Old Password <b class="text-danger">*</b></label>
+                        <div class="form-icon position-relative">
+                            <i data-feather="key" class="fea icon-sm icons"></i>
+                            <input type="password" class="form-control ps-5" placeholder="Old Password"
+                                formControlName="oldPassword"
+                                [ngClass]="{ 'is-invalid': submitted && b['oldPassword'].errors || b['oldPassword'].invalid && (b['oldPassword'].dirty || b['oldPassword'].touched)}">
+                            <div *ngIf="submitted && b['oldPassword'].errors || b['oldPassword'].invalid && (b['oldPassword'].dirty || b['oldPassword'].touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="b['oldPassword'].errors['required']" class="req">Required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 mt-1">
+                    <div class="mb">
+                        <label class="form-label">New Password <b class="text-danger">*</b></label>
+                        <div class="form-icon position-relative">
+                            <i data-feather="key" class="fea icon-sm icons"></i>
+                            <input type="password" class="form-control ps-5" #pw placeholder="New Password"
+                                formControlName="newPassword"
+                                [ngClass]="{ 'is-invalid': submitted && b['newPassword'].errors || b['newPassword'].invalid && (b['newPassword'].dirty || b['newPassword'].touched)}">
+                            <div *ngIf="submitted && b['newPassword'].errors || b['newPassword'].invalid && (b['newPassword'].dirty || b['newPassword'].touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="b['newPassword'].errors['required']" class="req">Required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 mt-1">
+                    <div class="mb">
+                        <label class="form-label">Confirm Password <b class="text-danger">*</b></label>
+                        <div class="form-icon position-relative">
+                            <i data-feather="key" class="fea icon-sm icons"></i>
+                            <input type="password" class="form-control ps-5" #cpw placeholder="Confirm Password"
+                                formControlName="confirmPassword"
+                                [ngClass]="{ 'is-invalid': submitted && b['confirmPassword'].errors || b['confirmPassword'].invalid && (b['confirmPassword'].dirty || b['confirmPassword'].touched)}">
+                            <div *ngIf="submitted && b['confirmPassword'].errors || b['confirmPassword'].invalid && (b['confirmPassword'].dirty || b['confirmPassword'].touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="b['confirmPassword'].errors['required']" class="req">Required</div>
+                                <div *ngIf="b['confirmPassword'].errors['confirmedValidator']">
+                                    Passwords Did Not Match
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" (click)="changePassword(logout,modal)">Update Password</button>
+    </div>
+</ng-template>
+<ng-template #logout let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title text-uppercase">User Login</h5>
+        <button class="close fa fa-xmark" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body delete">
+        <p>
+            <strong>Are you sure want to logout ?</strong>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-sm btn-danger" (click)="modal.dismiss('cancel click')">Continue</button>
+        <button class="btn btn-sm btn-primary" (click)="login(modal)">Ok</button>
+    </div>
+</ng-template>

@@ -1,0 +1,161 @@
+<div class="page-wrapper toggled">
+    <main class="page-content bg-light">
+        <div class="container-fluid">
+            <div class="layout-specing">
+                <div class="d-md-flex justify-content-between align-items-center my-1">
+                    <h5 class="mb-0 text-uppercase">Students</h5>
+                    <button class="btn btn-primary btn-md" (click)="studreg()">Add Student</button>
+                </div>
+                <!-- <div class="pipe" *ngIf="( dataValue | search:searchStudent) as resultArr"> -->
+                    <form action="" [formGroup]="downloadForm">
+                        <div class="card py-3 px-2 shadow rounded">
+                            <div class="row filter mt-2">
+                                <div class="col-2 left">
+                                    <input class="form-control" type="text" id="search" name="search" autocomplete="off"
+                                        formControlName="rollNo" placeholder="Search Roll No" (keyup)="addValidation('rollNo')"
+                                        [ngClass]="{ 'is-invalid': submitted && b['rollNo'].errors || b['rollNo'].invalid && (b['rollNo'].dirty || b['rollNo'].touched)}">
+                                    <div *ngIf="submitted && b['rollNo'].errors || b['rollNo'].invalid && (b['rollNo'].dirty || b['rollNo'].touched)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="b['rollNo'].errors['required']" class="req">Required</div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <input class="form-control" type="text" id="search" name="search" autocomplete="off"
+                                        formControlName="studentFirstName" placeholder="Search Name" (keyup)="addValidation('studentFirstName')"
+                                        [ngClass]="{ 'is-invalid': submitted && b['studentFirstName'].errors || b['studentFirstName'].invalid && (b['studentFirstName'].dirty || b['studentFirstName'].touched)}">
+                                    <div *ngIf="submitted && b['studentFirstName'].errors || b['studentFirstName'].invalid && (b['studentFirstName'].dirty || b['studentFirstName'].touched)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="b['studentFirstName'].errors['required']" class="req">Required</div>
+                                    </div>
+                                </div> 
+                                <div class="col-2">
+                                    <ng-select class="custom shadow-none" [items]="degreeNamearr" bindLabel="name"
+                                        bindValue="id" placeholder="Select Degree Type" formControlName="degreeType"
+                                        (change)="filter($event)"
+                                        [ngClass]="{ 'is-invalid': submitted && b['degreeType'].errors || b['degreeType'].invalid && (b['degreeType'].dirty || b['degreeType'].touched)}">
+                                    </ng-select>
+                                    <div *ngIf="submitted && b['degreeType'].errors || b['degreeType'].invalid && (b['degreeType'].dirty || b['degreeType'].touched)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="b['degreeType'].errors['required']" class="req">Required</div>
+                                    </div>
+                                </div> &
+                                <div class="col-2">
+                                    <ng-select class="custom shadow-none" placeholder="Select Degree"
+                                        formControlName="degree" (change)="branchGetAll($event)" [items]="degreeArr"
+                                        bindLabel="degree" bindValue="degree"
+                                        [ngClass]="{ 'is-invalid': submitted && b['degree'].errors || b['degree'].invalid && (b['degree'].dirty || b['degree'].touched)}">
+                                    </ng-select>
+                                    <div *ngIf="submitted && b['degree'].errors || b['degree'].invalid && (b['degree'].dirty || b['degree'].touched)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="b['degree'].errors['required']" class="req">Required</div>
+                                    </div>
+                                </div> &
+                                <div class="col-2">
+                                    <ng-select class="custom shadow-none" [items]="branch_Get" bindLabel="branchName"
+                                        bindValue="branchName" placeholder="Select Department"
+                                        formControlName="branchName" (change)="branchIdGet($event)"
+                                        [ngClass]="{ 'is-invalid': submitted && b['branchName'].errors || b['branchName'].invalid && (b['branchName'].dirty || b['branchName'].touched)}">
+                                    </ng-select>
+                                    <div *ngIf="submitted && b['branchName'].errors || b['branchName'].invalid && (b['branchName'].dirty || b['branchName'].touched)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="b['branchName'].errors['required']" class="req">Required</div>
+                                    </div>
+                                </div>
+                                <div class="col-1 me-2">
+                                   <div class="d-flex">
+                                    <button class="btn btn-primary btn-md me-2" (click)="searchFilter()">Filter</button>
+                                    <!-- <button class="btn btn-primary btn-md" (click)="studentPatch()">Show</button> -->
+                                   </div>
+                                </div>
+                                <div class="col-1">
+                                   <div class="d-flex">
+                                    <button class="btn btn-primary btn-sm me-2" [disabled]="downloadForm.value.rollNo || downloadForm.value.studentFirstName" (click)="downloadPdf(view)">
+                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="btn btn-success btn-sm" [disabled]="downloadForm.value.rollNo || downloadForm.value.studentFirstName" (click)="downloadXl()">
+                                        <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                                    </button>
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row"
+                            *ngIf="showTable">
+                            <div class="col-12 mt-2">
+                                <div class="table-responsive shadow rounded">
+                                    <table class="table table-center bg-white mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 7%;" class="border-bottom text-uppercase p-2">S.No</th>
+                                                <th style="width: 15%;" class="border-bottom text-uppercase p-2">Name</th>
+                                                <th style="width: 15%;" class="border-bottom text-uppercase p-2">Roll No
+                                                </th>
+                                                <th style="width: 15%;" class="border-bottom text-uppercase p-2">Degree</th>
+                                                <th style="width: 25%;" class="border-bottom text-uppercase p-2">Department
+                                                </th>
+                                                <th style="width: 20%;" class="border-bottom text-uppercase p-2">Year Of
+                                                    Join
+                                                </th>
+                                                <th style="width: 10%;" class="border-bottom text-uppercase p-2">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of dataValue; let i=index">
+                                                <th class="p-1 td">{{i+1}}</th>
+                                                <td class="p-1 data">{{data.studentFirstName}}</td>
+                                                <td class="p-1 data">{{data.rollNo}}</td>
+                                                <td class="p-1 data">{{data.degree}}</td>
+                                                <td class="p-1 data">{{data.branchName}}</td>
+                                                <td class="p-1 data">{{data.studentYearOfJoin}}</td>
+                                                <td class="p-1 data"> <button class="btn me-2"><i
+                                                            class="fa-regular fa-pen-to-square"
+                                                            (click)="onEdit(data.id)" data-bs-toggle="tooltip"
+                                                            data-bs-placement="bottom" title="Edit"></i></button>
+                                                    <button class="btn" (click)="deleteModal(delete,data.id)"><i
+                                                            class="fa fa-trash"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr *ngIf="dataValue.length ==0">
+                                                <td colspan="6" class="text-center"><i class="fa fa-search"></i>
+                                                    <p>No Data</p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                <!-- </div> -->
+            </div>
+        </div>
+    </main>
+</div>
+<ng-template #delete let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title text-uppercase">Delete Student</h5>
+        <button class="close fa fa-xmark" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body delete">
+        <p>
+            <strong>Are you sure want to delete ?</strong>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <!-- <button class="btn btn-sm btn-danger" (click)="modal.dismiss('cancel click')">Cancel</button> -->
+        <button class="btn btn-sm btn-primary" (click)="onDelete(modal)">Ok</button>
+    </div>
+</ng-template>
+<ng-template #view let-modal style="z-index: 1;">
+    <div class="modal-header">
+        <h5 class="modal-title text-uppercase">Students {{departmentName}}</h5>
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-primary btn-md" (click)="pdfDownload(modal)"><i class="fa fa-file-pdf-o me-2" aria-hidden="true"></i>Download</button>
+            <button class="close fa fa-xmark" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+    </div>
+    <div class="modal-body view" style="overflow: scroll;">
+        <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
+            style="width: 780px; height: 500px"></pdf-viewer>
+    </div>
+</ng-template>

@@ -1,0 +1,102 @@
+.form-control {
+    font-size: 12px;
+}
+
+.breadcrumb .breadcrumb-item:after {
+    content: none !important;
+}
+
+nav ul li a {
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 0.4rem 0.5rem !important;
+}
+
+.modal-body {
+    padding: 0.5rem !important;
+}
+
+.modal-footer {
+    padding: 0.2rem !important;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 0rem !important;
+}
+
+.req {
+    font-size: 10px;
+    color: red;
+}
+
+th {
+    // font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
+}
+
+thead {
+    background-color: rgb(171 209 247) !important;
+}
+
+td {
+    font-size: 14px !important;
+}
+
+.no {
+    padding-left: 15px !important;
+}
+
+.td {
+    padding-left: 10px !important;
+}
+
+.was-validated select.form-control:invalid,
+select.form-control.is-invalid {
+    background-position: right 8px center !important;
+}
+
+.box {
+    height: 30px !important;
+    font-size: 16px;
+    color: #1c87c9;
+}
+
+.ng-select.custom {
+    border: 0px;
+    min-height: 0px;
+    border-radius: 0;
+}
+
+::ng-deep .ng-select.custom .ng-select-container {
+    font-size: 12px;
+}
+
+::ng-deep .ng-select.ng-select-single .ng-select-container .ng-value-container {
+    padding-left: 4px !important;
+}
+
+::ng-deep .ng-select.ng-select-single .ng-select-container {
+    height: 32px !important;
+}
+
+::ng-deep .ng-select .ng-select-container {
+    min-height: calc(1.5em + 0.75rem + 2px) !important;
+}
+
+::ng-deep .ng-arrow-wrapper {
+    display: none !important;
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.table tbody {
+    // height: 400px;
+    min-height: 400px;
+    max-height: 400px;
+}

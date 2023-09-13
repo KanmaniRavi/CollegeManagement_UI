@@ -1,0 +1,385 @@
+<div class="page-wrapper toggled">
+  <main class="page-content bg-light">
+    <div class="container-fluid">
+      <div class="layout-specing">
+        <div class="d-flex justify">
+          <h5 class="mb-0 text-uppercase">Student Admission Form</h5>
+          <nav aria-label="breadcrumb">
+            <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
+              <li class="breadcrumb-item text-capitalize"><a (click)="home()">Admission</a></li>
+              <li class="breadcrumb-item text-capitalize"><a (click)="student()">Student</a></li>
+              <li class="breadcrumb-item text-capitalize active" aria-current="page">Student Reg</li>
+            </ul>
+          </nav>
+        </div>
+        <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+          <div class="card rounded shadow mt-3">
+            <div class="the-fieldset">
+              <legend class="the-legend">Basic Details</legend>
+            </div>
+            <div class="row px-2">
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="firstName">First Name <b class="text-danger">*</b></label>
+                <input formControlName="studentFirstName" type="text" class="form-control shadow-none"
+                  placeholder="First Name"
+                  [ngClass]="{ 'is-invalid': submitted && b['studentFirstName'].errors || b['studentFirstName'].invalid && (b['studentFirstName'].dirty || b['studentFirstName'].touched)}">
+                <div
+                  *ngIf="submitted && b['studentFirstName'].errors || b['studentFirstName'].invalid && (b['studentFirstName'].dirty || b['studentFirstName'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="b['studentFirstName'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="lastName">Last Name <b class="text-danger">*</b></label>
+                <input formControlName="studentLastName" type="text" class="form-control shadow-none"
+                  placeholder="Last Name"
+                  [ngClass]="{ 'is-invalid': submitted && b['studentLastName'].errors || b['studentLastName'].invalid && (b['studentLastName'].dirty || b['studentLastName'].touched)}">
+                <div
+                  *ngIf="submitted && b['studentLastName'].errors || b['studentLastName'].invalid && (b['studentLastName'].dirty || b['studentLastName'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="b['studentLastName'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+            </div>
+            <div class="row px-2">
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="parentName" class="mt-2">Parent Name <b class="text-danger">*</b></label>
+                <input formControlName="parentName" type="text" class="form-control shadow-none"
+                  placeholder="Parent Name"
+                  [ngClass]="{ 'is-invalid': submitted && b['parentName'].errors || b['parentName'].invalid && (b['parentName'].dirty || b['parentName'].touched)}">
+                <div
+                  *ngIf="submitted && b['parentName'].errors || b['parentName'].invalid && (b['parentName'].dirty || b['parentName'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="b['parentName'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="gender" class="mt-2">Gender <b class="text-danger">*</b></label>
+                <div class="d-flex">
+                  <div class="form-check">
+                    <input class="form-check-input" value="male" formControlName="gender" type="radio" name="gender"
+                      id="flexRadioDefault1" [ngClass]="{ 'is-invalid': submitted && b['gender'].invalid}" />
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Male
+                    </label>
+                    <div class="invalid-feedback">
+                      <div *ngIf="submitted && b['gender'].invalid" class="reqs">Required</div>
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" value="female" formControlName="gender" type="radio" name="gender"
+                      id="flexRadioDefault2" [ngClass]="{ 'is-invalid': submitted && b['gender'].invalid}" />
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      Female
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" value="others" formControlName="gender" type="radio" name="gender"
+                      id="flexRadioDefault3" [ngClass]="{ 'is-invalid': submitted && b['gender'].invalid}" />
+                    <label class="form-check-label" for="flexRadioDefault3">
+                      Others
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row px-2">
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="dob" class="mt-2">Date Of Birth <b class="text-danger">*</b></label>
+                <input formControlName="studentDateOfBirth" type="date" class="form-control shadow-none"
+                  placeholder="Date Of Birth"
+                  [ngClass]="{ 'is-invalid': submitted && b['studentDateOfBirth'].errors || b['studentDateOfBirth'].invalid && (b['studentDateOfBirth'].dirty || b['studentDateOfBirth'].touched)}">
+                <div
+                  *ngIf="submitted && b['studentDateOfBirth'].errors || b['studentDateOfBirth'].invalid && (b['studentDateOfBirth'].dirty || b['studentDateOfBirth'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="b['studentDateOfBirth'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="rollno" class="mt-2">Roll No <b class="text-danger">*</b></label>
+                <input formControlName="rollNo" type="text" class="form-control shadow-none" placeholder="Roll No"
+                  [ngClass]="{ 'is-invalid': submitted && b['rollNo'].errors || b['rollNo'].invalid && (b['rollNo'].dirty || b['rollNo'].touched)}">
+                <div
+                  *ngIf="submitted && b['rollNo'].errors || b['rollNo'].invalid && (b['rollNo'].dirty || b['rollNo'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="b['rollNo'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+            </div>
+            <div class="row px-2">
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="degreeType" class="mt-2">Degree Type<b class="text-danger">*</b></label>
+                <ng-select class="custom shadow-none" [items]="degreeNamearr" bindLabel="name" bindValue="id"
+                  placeholder="Select Degree Type" formControlName="degreeType" (change)="filter($event)"
+                  [ngClass]="{ 'is-invalid': submitted && b['degreeType'].errors || b['degreeType'].invalid && (b['degreeType'].dirty || b['degreeType'].touched)}">
+                </ng-select>
+                <div
+                  *ngIf="submitted && b['degreeType'].errors || b['degreeType'].invalid && (b['degreeType'].dirty || b['degreeType'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="b['degreeType'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="degreeId" class="mt-2">Degree <b class="text-danger">*</b></label>
+                <ng-select class="custom shadow-none" placeholder="Select Degree" formControlName="degreeId"
+                  (change)="branchGet($event)" [items]="degreeArr" bindLabel="degree" bindValue="id"
+                  [ngClass]="{ 'is-invalid': submitted && b['degreeId'].errors || b['degreeId'].invalid && (b['degreeId'].dirty || b['degreeId'].touched)}">
+                </ng-select>
+                <div
+                  *ngIf="submitted && b['degreeId'].errors || b['degreeId'].invalid && (b['degreeId'].dirty || b['degreeId'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="b['degreeId'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+            </div>
+            <div class="row px-2">
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="branchId" class="mt-2">Department <b class="text-danger">*</b></label>
+                <ng-select class="custom shadow-none" [items]="branch_Get" bindLabel="branchName" bindValue="id"
+                  placeholder="Select Department" formControlName="branchId"
+                  [ngClass]="{ 'is-invalid': submitted && b['branchId'].errors || b['branchId'].invalid && (b['branchId'].dirty || b['branchId'].touched)}">
+                </ng-select>
+                <div
+                  *ngIf="submitted && b['branchId'].errors || b['branchId'].invalid && (b['branchId'].dirty || b['branchId'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="b['branchId'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="join" class="mt-2">Year Of Join <b class="text-danger">*</b></label>
+                <input formControlName="studentYearOfJoin" type="number" class="form-control shadow-none"
+                  placeholder="Year Of Join"
+                  [ngClass]="{ 'is-invalid': submitted && b['studentYearOfJoin'].errors || b['studentYearOfJoin'].invalid && (b['studentYearOfJoin'].dirty || b['studentYearOfJoin'].touched)}">
+                <div
+                  *ngIf="submitted && b['studentYearOfJoin'].errors || b['studentYearOfJoin'].invalid && (b['studentYearOfJoin'].dirty || b['studentYearOfJoin'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="b['studentYearOfJoin'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+            </div>
+            <div class="row px-2 mb-3">
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="end" class="mt-2">Year Of End <b class="text-danger">*</b></label>
+                <input formControlName="courseFinishingYear" type="number" class="form-control shadow-none"
+                  placeholder="Year Of End"
+                  [ngClass]="{ 'is-invalid': submitted && b['courseFinishingYear'].errors || b['courseFinishingYear'].invalid && (b['courseFinishingYear'].dirty || b['courseFinishingYear'].touched)}">
+                <div
+                  *ngIf="submitted && b['courseFinishingYear'].errors || b['courseFinishingYear'].invalid && (b['courseFinishingYear'].dirty || b['courseFinishingYear'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="b['courseFinishingYear'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card rounded shadow mt-3">
+            <div class="the-fieldset">
+              <legend class="the-legend">Contact Details</legend>
+            </div>
+            <div class="row px-2">
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="email" class="mt-2">Email <b class="text-danger">*</b></label>
+                <input formControlName="emailId" type="text" class="form-control shadow-none" placeholder="Email"
+                  [ngClass]="{ 'is-invalid': submitted && b['emailId'].errors ||b['emailId'].invalid && (b['emailId'].dirty ||b['emailId'].touched)}">
+                <div
+                  *ngIf="submitted &&b['emailId'].errors ||b['emailId'].invalid && (b['emailId'].dirty ||b['emailId'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="b['emailId'].errors['required']" class="req">Required</div>
+                  <div *ngIf="b['emailId'].errors['email']" class="req">Invalid Email</div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="mobile" class="mt-2">Parent No <b class="text-danger">*</b></label>
+                <input formControlName="parentNumber" type="number" class="form-control shadow-none"
+                  placeholder="Phone No"
+                  [ngClass]="{ 'is-invalid': submitted && b['parentNumber'].errors || b['parentNumber'].invalid && (b['parentNumber'].dirty || b['parentNumber'].touched)}">
+                <div
+                  *ngIf="submitted && b['parentNumber'].errors || b['parentNumber'].invalid && (b['parentNumber'].dirty || b['parentNumber'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="b['parentNumber'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+            </div>
+            <div class="row px-2 pb-3">
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="mobile" class="mt-2">Mobile No <b class="text-danger">*</b></label>
+                <input formControlName="phoneNumber" type="number" class="form-control shadow-none"
+                  placeholder="Mobile No"
+                  [ngClass]="{ 'is-invalid': submitted && b['phoneNumber'].errors || b['phoneNumber'].invalid && (b['phoneNumber'].dirty || b['phoneNumber'].touched)}">
+                <div
+                  *ngIf="submitted && b['phoneNumber'].errors || b['phoneNumber'].invalid && (b['phoneNumber'].dirty || b['phoneNumber'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="b['phoneNumber'].errors['required']" class="req">Required</div>
+                  <div *ngIf="b['phoneNumber'].errors['pattern']" class="req">Mobile Number should have 10 digit.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card rounded shadow mt-3" formGroupName="permanent">
+            <div class="the-fieldset">
+              <legend class="the-legend">Permanent Address Details</legend>
+            </div>
+            <div class="row px-2">
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="firstName" class="mt-2">Country <b class="text-danger">*</b></label>
+                <ng-select class="custom" (change)="stateGetCountryId($event, 'fromHTMLpermanent')"
+                  placeholder="Select Country" formControlName="countryId"
+                  [ngClass]="{ 'is-invalid': submitted && h.controls['countryId'].errors || h.controls['countryId'].invalid && (h.controls['countryId'].dirty || h.controls['countryId'].touched)}">
+                  <ng-option class="option" *ngFor="let country of countryGet"
+                    [value]="country.id">{{country.name}}</ng-option>
+                </ng-select>
+                <div
+                  *ngIf="submitted && h.controls['countryId'].errors || h.controls['countryId'].invalid && (h.controls['countryId'].dirty || h.controls['countryId'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="h.controls['countryId'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="firstName" class="mt-2">State <b class="text-danger">*</b></label>
+                <ng-select class="custom" placeholder="Select State"
+                  (change)="districtGetStateId($event, 'fromHTMLpermanent')" formControlName="stateId"
+                  [ngClass]="{ 'is-invalid': submitted && h.controls['stateId'].errors || h.controls['stateId'].invalid && (h.controls['stateId'].dirty || h.controls['stateId'].touched)}">
+                  <ng-option class="option" *ngFor="let state of permanent_state_arr"
+                    [value]="state.id">{{state.name}}</ng-option>
+                </ng-select>
+                <div
+                  *ngIf="submitted && h.controls['stateId'].errors || h.controls['stateId'].invalid && (h.controls['stateId'].dirty || h.controls['stateId'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="h.controls['stateId'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+            </div>
+            <div class="row px-2">
+              
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="firstName" class="mt-2">District <b class="text-danger">*</b></label>
+                <ng-select class="custom" placeholder="Select District" formControlName="districtId"
+                  [ngClass]="{ 'is-invalid': submitted && h.controls['districtId'].errors || h.controls['districtId'].invalid && (h.controls['districtId'].dirty || h.controls['districtId'].touched)}">
+                  <ng-option class="option" *ngFor="let district of permanent_dist_arr"
+                    [value]="district.id">{{district.name}}</ng-option>
+                </ng-select>
+                <div
+                  *ngIf="submitted && h.controls['districtId'].errors || h.controls['districtId'].invalid && (h.controls['districtId'].dirty || h.controls['districtId'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="h.controls['districtId'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="address2" class="mt-2">Address <b class="text-danger">*</b></label>
+                <textarea formControlName="address" type="text" class="form-control shadow-none" placeholder="Address"
+                  [ngClass]="{ 'is-invalid': submitted && h.controls['address'].errors || h.controls['address'].invalid && (h.controls['address'].dirty || h.controls['address'].touched)}">
+                </textarea>
+                <div
+                  *ngIf="submitted && h.controls['address'].errors || h.controls['address'].invalid && (h.controls['address'].dirty || h.controls['address'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="h.controls['address'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+            </div>
+            <div class="row px-2 pb-3">
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="postalCode" class="mt-2">Postal Code <b class="text-danger">*</b></label>
+                <input formControlName="postalCode" type="number" class="form-control shadow-none"
+                  placeholder="Postal Code"
+                  [ngClass]="{ 'is-invalid': submitted && h.controls['postalCode'].errors ||h.controls['postalCode'].invalid && (h.controls['postalCode'].dirty ||h.controls['postalCode'].touched)}">
+                <div
+                  *ngIf="submitted &&h.controls['postalCode'].errors ||h.controls['postalCode'].invalid && (h.controls['postalCode'].dirty ||h.controls['postalCode'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="h.controls['postalCode'].errors['required']" class="req">Required</div>
+                  <div *ngIf="h.controls['postalCode'].errors['pattern']" class="req">Postal code should have 6
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card rounded shadow mt-3" formGroupName="communication">
+            <div class="the-fieldset">
+              <legend class="the-legend">Communication Address Details</legend>
+              <span class="d-flex align-items-center">
+                <input type="checkbox" class="mr-2" (change)="sameAddress($event)"><label for=""
+                  class="label1 mt-2 mr-2">Same Address</label></span>
+            </div>
+            <div class="row px-2">             
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="firstName" class="mt-2">Country <b class="text-danger">*</b></label>
+                <ng-select class="custom" (change)="stateGetCountryId($event, 'fromHTMLcommunication')"
+                  placeholder="Select Country" formControlName="countryId"
+                  [ngClass]="{ 'is-invalid': submitted && c.controls['countryId'].errors || c.controls['countryId'].invalid && (c.controls['countryId'].dirty || c.controls['countryId'].touched)}">
+                  <ng-option class="option" *ngFor="let country of countryGet"
+                    [value]="country.id">{{country.name}}</ng-option>
+                </ng-select>
+                <div
+                  *ngIf="submitted && c.controls['countryId'].errors || c.controls['countryId'].invalid && (c.controls['countryId'].dirty || c.controls['countryId'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="c.controls['countryId'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="firstName" class="mt-2">State <b class="text-danger">*</b></label>
+                <ng-select class="custom" placeholder="Select State"
+                  (change)="districtGetStateId($event, 'fromHTMLcommunication')" formControlName="stateId"
+                  [ngClass]="{ 'is-invalid': submitted && c.controls['stateId'].errors || c.controls['stateId'].invalid && (c.controls['stateId'].dirty || c.controls['stateId'].touched)}">
+                  <ng-option class="option" *ngFor="let state of com_state_arr"
+                    [value]="state.id">{{state.name}}</ng-option>
+                </ng-select>
+                <div
+                  *ngIf="submitted && c.controls['stateId'].errors || c.controls['stateId'].invalid && (c.controls['stateId'].dirty || c.controls['stateId'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="c.controls['stateId'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+            </div>
+            <div class="row px-2">
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="first" class="mt-2">District <b class="text-danger">*</b></label>
+                <ng-select class="custom" placeholder="Select District" formControlName="districtId"
+                  [ngClass]="{ 'is-invalid': submitted && c.controls['districtId'].errors || c.controls['districtId'].invalid && (c.controls['districtId'].dirty || c.controls['districtId'].touched)}">
+                  <ng-option class="option" *ngFor="let district of com_dist_arr"
+                    [value]="district.id">{{district.name}}</ng-option>
+                </ng-select>
+                <div
+                  *ngIf="submitted && c.controls['districtId'].errors || c.controls['districtId'].invalid && (c.controls['districtId'].dirty || c.controls['districtId'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="c.controls['districtId'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="address" class="mt-2">Address <b class="text-danger">*</b></label>
+                <textarea formControlName="address" type="text" class="form-control shadow-none" placeholder="Address"
+                  [ngClass]="{ 'is-invalid': submitted && c.controls['address'].errors || c.controls['address'].invalid && (c.controls['address'].dirty || c.controls['address'].touched)}">
+                            </textarea>
+                <div
+                  *ngIf="submitted && c.controls['address'].errors || c.controls['address'].invalid && (c.controls['address'].dirty || c.controls['address'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="c.controls['address'].errors['required']" class="req">Required</div>
+                </div>
+              </div>
+            </div>
+            <div class="row px-2 pb-3">
+              <div class="col-12 col-sm-12 col-md-6">
+                <label for="postalCode" class="mt-2">Postal Code <b class="text-danger">*</b></label>
+                <input formControlName="postalCode" type="number" class="form-control shadow-none"
+                  placeholder="Postal Code"
+                  [ngClass]="{ 'is-invalid': submitted && c.controls['postalCode'].errors ||c.controls['postalCode'].invalid && (c.controls['postalCode'].dirty ||c.controls['postalCode'].touched)}">
+                <div
+                  *ngIf="submitted &&c.controls['postalCode'].errors ||c.controls['postalCode'].invalid && (c.controls['postalCode'].dirty ||c.controls['postalCode'].touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="c.controls['postalCode'].errors['required']" class="req">Required</div>
+                  <div *ngIf="c.controls['postalCode'].errors['pattern']" class="req">Postal code should have 6
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row my-2 submit">
+              <div class="text-end mt-1">
+                <input type="submit" id="submit" name="send" class="btn btn-primary" *ngIf="!studentForm.value.id"
+                  value="Submit">
+                <button class="btn btn-sm btn-primary" *ngIf="studentForm.value.id">Update</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>

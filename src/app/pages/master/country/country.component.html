@@ -1,0 +1,113 @@
+<div class="page-wrapper toggled">
+    <main class="page-content bg-light">
+        <div class="container-fluid">
+            <div class="layout-specing">
+                <div class="d-md-flex justify-content-between align-items-center mt-1">
+                    <h5 class="mb-0 text-uppercase">Country</h5>
+                    <nav aria-label="breadcrumb" class="text-end">
+                        <button class="btn btn-md btn-primary" (click)="openModal(content)">Add Country</button>
+                    </nav>
+                </div>
+                <div class="pipe" *ngIf="(dataValue | master:countrySearch) as resultArr">
+                    <div class="row mt-2">
+                        <div class="col-9"></div>
+                        <div class="col-3">
+                            <input class="form-control search" [(ngModel)]="countrySearch" type="text" id="search"
+                                name="search" autocomplete="off" placeholder="Search Name">
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div class="table-responsive shadow rounded">
+                                <table class="table table-center bg-white mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-bottom p-2 text-uppercase">S.No</th>
+                                            <th class="border-bottom p-2 text-uppercase">Name</th>
+                                            <th class="border-bottom p-2 text-uppercase">Short Name</th>
+                                            <th class="border-bottom p-2 text-uppercase">Phone Code</th>
+                                            <th class="border-bottom p-2 text-uppercase">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of dataValue | master:countrySearch; let i=index">
+                                            <th class="border-bottom p-1 no">{{i+1}}</th>
+                                            <td class="border-bottom p-1 td">{{data.name | mastercapitalize}}</td>
+                                            <td class="border-bottom p-1 td">{{data.shortName | mastercapitalize}}</td>
+                                            <td class="border-bottom p-1 td">{{data.countryCode}}</td>
+                                            <td class="border-bottom p-1">
+                                                <button class="btn me-2" (click)="onEdit(data.id, content)"><i
+                                                        class="fa-regular fa-pen-to-square"></i></button>
+                                                <button class="btn" (click)="deleteModal(data.id, delete)"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="!resultArr.length">
+                                            <td colspan="5" class="text-center"><i class="fa fa-search"></i>
+                                                <p>No Data Found</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h5 *ngIf="!countryForm.value.id" class="modal-title text-uppercase">Create Country</h5>
+        <h5 *ngIf="countryForm.value.id" class="modal-title text-uppercase">Update Country</h5>
+        <button type="button" class="close fa fa-xmark" aria-label="Close"
+            (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="countryForm" class="d-flex flex-column">
+            <div class="rounded d-flex flex-column p-1">
+                <label for="name">Country <b class="text-danger">*</b></label>
+                <input formControlName="name" type="text" class="form-control shadow-none" placeholder="Name"
+                    [ngClass]="{ 'is-invalid': submitted && b['name'].errors || b['name'].invalid && (b['name'].dirty || b['name'].touched)}">
+                <div *ngIf="submitted && b['name'].errors || b['name'].invalid && (b['name'].dirty || b['name'].touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="b['name'].errors['required']" class="req">Required</div>
+                </div>
+                <label for="shortName" class="mt-2">Short Name <b class="text-danger">*</b></label>
+                <input formControlName="shortName" type="text" class="form-control shadow-none" placeholder="Short Name"
+                    [ngClass]="{ 'is-invalid': submitted && b['shortName'].errors || b['shortName'].invalid && (b['shortName'].dirty || b['shortName'].touched)}">
+                <div *ngIf="submitted && b['shortName'].errors || b['shortName'].invalid && (b['shortName'].dirty || b['shortName'].touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="b['shortName'].errors['required']" class="req">Required</div>
+                </div>
+                <label for="lastName" class="mt-2">Phone Code <b class="text-danger">*</b></label>
+                <input formControlName="countryCode" type="text" class="form-control shadow-none" placeholder="Code"
+                    [ngClass]="{ 'is-invalid': submitted && b['countryCode'].errors || b['countryCode'].invalid && (b['countryCode'].dirty || b['countryCode'].touched)}">
+                <div *ngIf="submitted && b['countryCode'].errors || b['countryCode'].invalid && (b['countryCode'].dirty || b['countryCode'].touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="b['countryCode'].errors['required']" class="req">Required</div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" *ngIf="countryForm.value.id" (click)="update(modal)">Update</button>
+        <button class="btn btn-primary" *ngIf="!countryForm.value.id" (click)="onSubmit(modal)">Submit</button>
+    </div>
+</ng-template>
+<ng-template #delete let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title text-uppercase">Delete Country</h5>
+        <button class="close fa fa-xmark" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body delete">
+        <p>
+            <strong>Are you sure want to delete ?</strong>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <!-- <button class="btn btn-sm btn-danger" (click)="modal.dismiss('cancel click')">Cancel</button> -->
+        <button class="btn btn-sm btn-primary" (click)="onDelete(modal)">Ok</button>
+    </div>
+</ng-template>

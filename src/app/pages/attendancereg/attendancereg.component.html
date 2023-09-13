@@ -1,0 +1,48 @@
+<div class="page-wrapper toggled">
+    <main class="page-content bg-light">
+        <div class="container-fluid">
+            <div class="layout-specing">
+                <div class="d-flex justify-content-between">
+                    <h5 class="mb-0 text-uppercase">Attendance List</h5>
+                    <nav aria-label="breadcrumb" class="d-flex justify-content-end">
+                        <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
+                            <li class="breadcrumb-item text-capitalize"><a (click)="home()">Home</a></li>
+                            <li class="breadcrumb-item text-capitalize"><a (click)="attendance()">Attendance</a></li>
+                            <li class="breadcrumb-item text-capitalize active" aria-current="page">Attendance Reg</li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="row">
+                    <div class="col-12 mt-2">
+                        <div class="table-responsive shadow rounded">
+                            <table class="table table-center bg-white mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="border-bottom p-2 text-uppercase">S.No</th>
+                                        <th class="border-bottom p-2 text-uppercase">Student Name</th>
+                                        <th class="border-bottom p-2 text-uppercase">Roll No</th>
+                                        <th class="border-bottom p-2 text-uppercase">Check-In</th>
+                                        <th class="border-bottom p-2 text-uppercase">Check-Out</th>
+                                        <th class="text-center text-uppercase border-bottom p-2">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th class="border-bottom td p-0">1</th>
+                                        <td class="border-bottom p-0 td">Raguvaran</td>
+                                        <td class="border-bottom p-0 td">55555</td>
+                                        <td class="border-bottom p-0 td">10.00</td>
+                                        <td class="border-bottom p-0 td">6.00</td>
+                                        <td class="text-center border-bottom p-1"><button
+                                                class="btn btn-primary mr-1">Present</button><button
+                                                class="btn btn-danger">Absent</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

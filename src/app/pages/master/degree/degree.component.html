@@ -1,0 +1,104 @@
+<div class="page-wrapper toggled">
+    <main class="page-content bg-light">
+        <div class="container-fluid">
+            <div class="layout-specing">
+                <div class="d-md-flex justify-content-between align-items-center mt-1">
+                    <h5 class="mb-0 text-uppercase">Degree</h5>
+                    <div aria-label="breadcrumb" class="text-end">
+                        <button class="btn btn-md btn-primary" (click)="openModal(content)">Add Degree</button>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-9"></div>
+                    <div class="col-3">
+                        <input class="form-control search" [(ngModel)]="degreeSearch" type="text" id="search"
+                            name="search" autocomplete="off" placeholder="Search Degree / Department">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mt-2">
+                        <div class="table-responsive shadow rounded">
+                            <table class="table table-center bg-white mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="border-bottom p-2 text-uppercase">S.No</th>
+                                        <th class="border-bottom p-2 text-uppercase">Degree Type</th>
+                                        <th class="border-bottom p-2 text-uppercase">Degree</th>
+                                        <th class="border-bottom p-2 text-uppercase">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="height">
+                                    <tr *ngFor="let degree of degreeValue | master:degreeSearch; let i=index">
+                                        <th class="border-bottom no p-1">{{i+1}}</th>
+                                        <td class="border-bottom td p-1">{{degree.degreeType}}</td>
+                                        <td class="border-bottom td p-1">{{degree.degree}}</td>
+                                        <td class="border-bottom p-1">
+                                            <button class="btn me-2" (click)="onEdit(content,degree.id)"><i
+                                                    class="fa-regular fa-pen-to-square"></i></button>
+                                            <button class="btn" (click)="deleteModel(degree.id, delete)"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="degreeValue.length ==0">
+                                        <td colspan="4" class="text-center"><i class="fa fa-search"></i>
+                                            <p>No Data Found</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h5 *ngIf="!degreeForm.value.id" class="modal-title text-uppercase">Create Degree</h5>
+        <h5 *ngIf="degreeForm.value.id" class="modal-title text-uppercase">Update Degree</h5>
+        <button class="close fa fa-xmark" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="degreeForm" class="d-flex flex-column">
+            <div class="rounded d-flex flex-column p-1">
+                <label for="degreeName">Degree Type</label>
+                <ng-select class="custom shadow-none" [items]="degreeNamearr" bindLabel="name" bindValue="id"
+                    placeholder="Select Degree Type" formControlName="degreeType"
+                    [ngClass]="{ 'is-invalid': submitted && b['degreeType'].errors || b['degreeType'].invalid && (b['degreeType'].dirty || b['degreeType'].touched)}">
+                </ng-select>
+                <div *ngIf="submitted && b['degreeType'].errors || b['degreeType'].invalid && (b['degreeType'].dirty || b['degreeType'].touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="b['degreeType'].errors['required']" class="req">Required</div>
+                </div>
+                <label for="degreetype" class="mt-2">Degree</label>
+                <input formControlName="degree" type="text" class="form-control shadow-none"
+                    placeholder="Degree"
+                    [ngClass]="{ 'is-invalid': submitted && b['degree'].errors || b['degree'].invalid && (b['degree'].dirty || b['degree'].touched)}">
+                <div *ngIf="submitted && b['degree'].errors || b['degree'].invalid && (b['degree'].dirty || b['degree'].touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="b['degree'].errors['required']" class="req">Required</div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" *ngIf="degreeForm.value.id" (click)="update(modal)">Update</button>
+        <button class="btn btn-sm btn-primary" (click)="onSubmit(modal)" *ngIf="!degreeForm.value.id">Submit</button>
+    </div>
+</ng-template>
+<ng-template #delete let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title text-uppercase">Delete Degree</h5>
+        <button class="close fa fa-xmark" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body delete">
+        <p>
+            <strong>Are you sure want to delete ?</strong>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <!-- <button class="btn btn-sm btn-danger" (click)="modal.dismiss('cancel click')">Cancel</button> -->
+        <button class="btn btn-sm btn-primary" (click)="onDelete(modal)">Ok</button>
+    </div>
+</ng-template>

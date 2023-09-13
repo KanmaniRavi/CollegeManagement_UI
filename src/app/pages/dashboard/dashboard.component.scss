@@ -1,0 +1,102 @@
+.col-xl-12 {
+    padding: 0px !important;
+}
+
+.dash {
+    font-size: 18px !important;
+    font-family: var(--bs-font-sans-serif);
+    line-height: 1.4;
+    font-weight: 600 !important;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+.faculty a {
+    color: white;
+}
+
+.student a {
+    color: white;
+}
+
+.rounded-pill {
+    background-color: #686871 !important;
+}
+
+.bg-success {
+    background-color: #41cd61 !important;
+}
+
+.bg-primary {
+    background-color: #6892ec !important;
+}
+
+.the-legend {
+    position: relative;
+    bottom: 12px;
+    left: 10px;
+    font-size: 14px;
+    line-height: 10px;
+    margin-bottom: 0;
+    color: white;
+    width: auto;
+    padding: 6px 10px;
+    background: white;
+    background-color: #3367d8;
+    border: 1px solid #e0e0e0;
+}
+
+th {
+    font-size: 14px;
+}
+
+td {
+    font-size: 14px !important;
+}
+
+.td {
+    padding-left: 10px !important;
+}
+
+.card1 {
+    min-height: 250px !important;
+    max-height: 250px !important;
+}
+
+.card2 {
+    min-height: 250px !important;
+    max-height: 250px !important;
+}
+
+.rows {
+    overflow-y: scroll !important;
+}
+
+.row1 {
+    overflow-y: scroll !important;
+    overflow-x: scroll !important;
+    max-height: 300px;
+}
+.tableFixHead {
+    width: 100%;
+}
+
+.tableFixHead thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+th,
+td {
+    padding: 8px 11px;
+    white-space: nowrap;
+}
+
+.th {
+    background: rgb(171 209 247)
+}
+.p-1{
+    padding: .4rem !important;
+}

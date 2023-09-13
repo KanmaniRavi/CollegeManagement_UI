@@ -1,0 +1,166 @@
+<div class="page-wrapper toggled">
+    <main class="page-content bg-light">
+        <div class="container-fluid">
+            <div class="layout-specing">
+                <div class="d-md-flex justify-content-between mt-1">
+                    <h5 class="mb-0 text-uppercase">Faculties</h5>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-primary btn-md" (click)="facultyreg()">Add Faculty</button>
+                    </div>
+                </div>
+                <div class="pipe" *ngIf="( dataValue | search:serachFaculty) as resultArr">
+                    <div class="row mt-2">
+
+                        <div class="col-9 download">
+                            <!-- <button class="btn btn-primary btn-sm me-2" (click)="download(openmodal)">
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-success btn-sm" (click)="download(modal)">
+                                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                            </button> -->
+                            <button class="btn btn-primary btn-sm me-2" (click)="download(openmodal)">
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control search" [(ngModel)]="serachFaculty" type="text" id="search"
+                                name="search" autocomplete="off" placeholder="Search Name / Department">
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-12">
+                            <div class="card shadow rounded">
+                                <table class="table table-center bg-white mb-0">
+                                    <thead class="tablehead">
+                                        <tr>
+                                            <th style="width: 7%;" class="border-bottom p-2 text-uppercase">S.No
+                                            </th>
+                                            <th style="width: 12%;" class="border-bottom p-2 text-uppercase">Name
+                                            </th>
+                                            <th style="width: 23%;" class="border-bottom p-2 text-uppercase">
+                                                Department</th>
+                                            <th style="width: 25%;" class="border-bottom p-2 text-uppercase">Gmail
+                                            </th>
+                                            <th style="width: 15%;" class="border-bottom p-2 text-uppercase">Joining
+                                                Date</th>
+                                            <th style="width: 10%;" class="border-bottom p-2 text-uppercase">Status
+                                            </th>
+                                            <th style="width: 10%;" class="border-bottom p-2 text-end text-uppercase">
+                                                Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of dataValue | search:serachFaculty; let i=index">
+                                            <th class="border-bottom p-1 td">{{i+1}}</th>
+                                            <td class="border-bottom p-1 data">{{data.firstName}}</td>
+                                            <td class="border-bottom p-1 data">{{data.department}}</td>
+                                            <td class="border-bottom p-1">{{data.email}}</td>
+                                            <td class="border-bottom p-1 data">{{data.joiningDate}}</td>
+                                            <td class="border-bottom p-1">
+                                                <div class="badge rounded"
+                                                    [ngClass]="{'bg-soft-success' : data.status === 'ACTIVE' , 'bg-soft-danger' : data.status === 'INACTIVE' }">
+                                                    {{data.status}}
+                                                </div>
+                                            </td>
+                                            <td class="border-bottom data">
+                                                <button class="btn me-2 mt-1" (click)="onEdit(data.id)"><i
+                                                        class="fa-regular fa-pen-to-square"></i></button>
+                                                <button class="btn mt-1" (click)="deleteModal(delete,data.id)"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="!resultArr.length">
+                                            <td colspan="6" class="text-center"><i class="fa fa-search"></i>
+                                                <p>No Data Found</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<ng-template #delete let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title text-uppercase">Delete Faculty</h5>
+        <button class="close fa fa-xmark" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body delete">
+        <p>
+            <strong>Are you sure want to delete ?</strong>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-sm btn-danger" (click)="modal.dismiss('cancel click')">Cancel</button>
+        <button class="btn btn-sm btn-primary" (click)="onDelete(modal)">Ok</button>
+    </div>
+</ng-template>
+<ng-template #openmodal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title text-uppercase">Faculty Download</h5>
+        <div class="d-flex justify-content-end">
+            <button class="close fa fa-xmark" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form action="" [formGroup]="facultyPdfForm">
+            <label for="">Department</label>
+            <ng-select class="custom shadow-none" [items]="faclutyDept" bindLabel="department" bindValue="id"
+                placeholder="Select Department" (change)="deptId($event)" formControlName="departmentId" [ngClass]="{ 'is-invalid': submitted && b['departmentId'].errors || b['departmentId'].invalid &&
+                (b['departmentId'].dirty || b['departmentId'].touched)}">
+            </ng-select>
+            <div *ngIf="submitted && b['departmentId'].errors || b['departmentId'].invalid && (b['departmentId'].dirty || b['departmentId'].touched)"
+                class="invalid-feedback">
+                <div *ngIf="b['departmentId'].errors['required']" class="req">Required</div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer d-flex justify-content-between">
+        <!-- <div class="d-flex justify-content-evenly"> -->
+            <button class="btn btn-md btn-primary" (click)="downloadPdf(view, modal)"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>Pdf View</button>
+            <button class="btn btn-md btn-success" (click)="downloadxl(modal)"><i class="fa fa-file-excel-o" aria-hidden="true"></i>Xl Download</button>
+        <!-- </div> -->
+    </div>
+</ng-template>
+<!-- <ng-template #modal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title text-uppercase">Faculty Xl Download</h5>
+        <div class="d-flex justify-content-end">
+            <button class="close fa fa-xmark" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form action="" [formGroup]="facultyPdfForm">
+            <label for="">Department</label>
+            <ng-select class="custom shadow-none" [items]="faclutyDept" bindLabel="department" bindValue="id"
+                placeholder="Select Department" (change)="deptId($event)" formControlName="departmentId" [ngClass]="{ 'is-invalid': submitted && b['departmentId'].errors || b['departmentId'].invalid &&
+                (b['departmentId'].dirty || b['departmentId'].touched)}">
+            </ng-select>
+            <div *ngIf="submitted && b['departmentId'].errors || b['departmentId'].invalid && (b['departmentId'].dirty || b['departmentId'].touched)"
+                class="invalid-feedback">
+                <div *ngIf="b['departmentId'].errors['required']" class="req">Required</div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-md btn-primary" (click)="downloadxl(modal)">Ok</button>
+    </div>
+</ng-template> -->
+<ng-template #view let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title text-uppercase">Faculties {{department}}</h5>
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-primary btn-sm" (click)="pdfDownload(pdfSrc)"><i class="fa fa-file-pdf-o me-2"
+                    aria-hidden="true"></i>Download</button>
+            <button class="close fa fa-xmark" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+    </div>
+    <div class="modal-body view">
+        <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
+            style="width: 780px; height: 500px"></pdf-viewer>
+    </div>
+</ng-template>

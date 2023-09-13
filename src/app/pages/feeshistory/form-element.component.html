@@ -1,0 +1,113 @@
+<div class="page-wrapper toggled">
+    <main class="page-content bg-light">
+        <div class="container-fluid">
+            <div class="layout-specing">
+                <div class="d-md-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0 text-uppercase">Fees History</h5>
+                </div>
+                <form action="" [formGroup]="searchForm">
+                    <div class="card py-3 px-2 shadow rounded">
+                        <div class="row mt-2">
+                            <div class="col-12 col-sm-12 col-md-2">
+                                <ng-select class="custom" placeholder="Select Degree" formControlName="degree"
+                                    (change)="branchGet($event)" [items]="degree" bindValue="degree" bindLabel="degree">
+                                </ng-select>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3">
+                                <ng-select class="custom" placeholder="Select Department" formControlName="branchName"
+                                    [items]="branch" bindLabel="branchName" bindValue="branchName">
+                                </ng-select>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-2 date1">
+                                <input class="form-control search" type="text" onfocus="(this.type='date')"
+                                    onblur="(this.type= this.value ? 'date' : 'text')" autocomplete="off"
+                                    formControlName="fromDate" placeholder="Select Start Date">
+                            </div>
+                            &
+                            <div class="col-12 col-sm-12 col-md-2 date2">
+                                <input class="form-control search" type="text" onfocus="(this.type='date')"
+                                    onblur="(this.type= this.value ? 'date' : 'text')" autocomplete="off"
+                                    formControlName="toDate" placeholder="Select End Date">
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-2">
+                                <button class="btn btn-primary btn-sm me-2" (click)="filter()">Filter
+                                </button>
+                                <button class="btn btn-primary btn-sm me-2" (click)="pdfDownload(pdf)">
+                                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                </button>
+                                <button class="btn btn-success btn-sm" (click)="downloadxl()">
+                                    <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-12 mt-3">
+                        <div class="table-responsive shadow rounded">
+                            <table class="table table-center bg-white mb-0">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%;" class="border-bottom p-2 text-uppercase">S.No</th>
+                                        <th style="width: 17%;" class="border-bottom p-2 text-uppercase">Student Name
+                                        </th>
+                                        <th style="width: 10%;" class="border-bottom p-2 text-uppercase">Roll No</th>
+                                        <th style="width: 8%;" class="border-bottom p-2 text-uppercase">Degree</th>
+                                        <th style="width: 23%;" class="border-bottom p-2 text-uppercase">Department</th>
+                                        <th style="width: 13%;" class="border-bottom p-2 text-uppercase">Receipt No</th>
+                                        <th style="width: 13%;" class="border-bottom p-2 text-uppercase">Receipt Date
+                                        </th>
+                                        <th style="width: 10%;" class="border-bottom p-2 text-uppercase px-2">Amount</th>
+                                        <th style="width: 3%;" class="border-bottom p-2 text-uppercase"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let fees of collectionGet; let i=index">
+                                        <th class="p-1 no">{{i+1}}</th>
+                                        <td class="p-1 td">
+                                            {{fees.studentFullName}}
+                                        </td>
+                                        <td class="p-1 td">{{fees.rollNo}}</td>
+                                        <td class="p-1 td">{{fees.degree}}</td>
+                                        <td class="p-1 td">{{fees.branchName}}</td>
+                                        <td class="p-1 td">{{fees.receiptNo}}</td>
+                                        <td class="p-1 td">{{fees.receiptDate}}</td>
+                                        <td class="p-1 td">
+                                            <div class="d-flex justify-content-end">
+                                                {{fees.feesHistoryComponent[0].totalPayables}}
+                                            </div>
+                                        </td>
+                                        <td class="text-center p-1">
+                                            <a (click)="print(pdf,fees.id)"
+                                            class="btn btn-sm add text-primary ms-2">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="!collectionGet.length">
+                                        <td colspan="8" class="text-center"><i class="fa fa-search"></i>
+                                            <p>No Data Found</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<ng-template #pdf let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title text-uppercase">PDF View</h5>
+        <div class="ml-auto">
+            <button class="btn btn-md btn-primary me-2" aria-label="Close" (click)="download(modal)"><i class="fa fa-file-pdf-o me-2" aria-hidden="true"></i>Download</button>
+            <button class="close fa fa-xmark m1-2" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+    </div>
+    <div class="modal-body pdf">
+        <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
+            style="width: 100%; height: 600px"></pdf-viewer>
+    </div>
+</ng-template>

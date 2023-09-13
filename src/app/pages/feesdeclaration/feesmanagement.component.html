@@ -1,0 +1,131 @@
+<div class="page-wrapper toggled">
+    <main class="page-content bg-light">
+        <div class="container-fluid">
+            <div class="layout-specing">
+                <form action="" [formGroup]="feesHeadForm">
+                    <div class="d-md-flex flex-column mt-3">
+                        <div class="d-flex justify">
+                            <h5 class="text-uppercase">Fees Declaration</h5>
+                            <nav aria-label="breadcrumb">
+                                <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
+                                    <li class="breadcrumb-item text-capitalize"><a (click)="home()">Admission</a></li>
+                                    <li class="breadcrumb-item text-capitalize"><a (click)="declaration()">Fees
+                                            Declaration</a></li>
+                                    <li class="breadcrumb-item text-capitalize active" aria-current="page">Fees
+                                        Declaration
+                                        Reg</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="card rounded px-3 py-4 mt-2">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-1 me-2">
+                                <label for="serach">Department</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4">
+                                <ng-select class="custom" placeholder="Select Department" formControlName="degreeTypeId"
+                                    (change)="branchGet($event)" [items]="degree" bindValue="id" bindLabel="degree"
+                                    [ngClass]="{ 'is-invalid': submitted && b['degreeTypeId'].errors || b['degreeTypeId'].invalid && (b['degreeTypeId'].dirty || b['degreeTypeId'].touched)}">
+                                </ng-select>
+                                <div *ngIf="submitted && b['degreeTypeId'].errors || b['degreeTypeId'].invalid && (b['degreeTypeId'].dirty || b['degreeTypeId'].touched)"
+                                    class="invalid-feedback">
+                                    <div *ngIf="b['degreeTypeId'].errors['required']" class="req">Required</div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-1">
+                                <label for="serach">Branch</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 branch">
+                                <ng-select class="custom" placeholder="Select Branch" formControlName="branchId"
+                                    (change)="search($event)" [items]="branch" bindLabel="branchName" bindValue="id"
+                                    [ngClass]="{ 'is-invalid': submitted && b['branchId'].errors || b['branchId'].invalid && (b['branchId'].dirty || b['branchId'].touched)}">
+                                </ng-select>
+                                <div *ngIf="submitted && b['branchId'].errors || b['branchId'].invalid && (b['branchId'].dirty || b['branchId'].touched)"
+                                    class="invalid-feedback">
+                                    <div *ngIf="b['branchId'].errors['required']" class="req">Required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 mt-3">
+                            <div class="table-responsive shadow rounded"
+                                *ngIf="feesHeadForm.value.degreeTypeId && feesHeadForm.value.branchId">
+                                <table class="table table-center bg-white mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 7%;" class="border-bottom p-2">S.No</th>
+                                            <th style="width: 40%;" class="border-bottom p-2">Fees Catagery</th>
+                                            <th style="width: 40%;" class="border-bottom p-2">Amount</th>
+                                            <th class="border-bottom p-2 text-center"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody formArrayName="feesDeclarationDetails">
+                                        <tr *ngFor="let input of feesHeadArr.controls;let i = index"
+                                            formGroupName="{{i}}">
+                                            <th class="border-bottom p-1 td">{{i+1}}</th>
+                                            <td class="border-bottom p-1">
+                                                <ng-select class="custom" placeholder="Select Fees Head"
+                                                    formControlName="feesHeadId" [items]="feesHeads"
+                                                    (change)="ngselcet($event,input,i)" bindLabel="feesHeadName"
+                                                    bindValue="id"
+                                                    [ngClass]="{ 'is-invalid': submitted && input.get('feesHeadId').errors || input.get('feesHeadId').invalid && (input.get('feesHeadId').dirty || input.get('feesHeadId').touched)}">
+                                                </ng-select>
+                                                <div *ngIf="submitted && input.get('feesHeadId').errors || input.get('feesHeadId').invalid && (input.get('feesHeadId').dirty || input.get('feesHeadId').touched)"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="input.get('feesHeadId').errors['required']" class="req">
+                                                        Required</div>
+                                                </div>
+                                            </td>
+                                            <td class="border-bottom p-1"><input type="number" class="form-control"
+                                                    placeholder="Amount" formControlName="amount" (keyup)="totalCal()"
+                                                    [ngClass]="{ 'is-invalid': submitted && input.get('amount').errors || input.get('amount').invalid && (input.get('amount').dirty || input.get('amount').touched)}">
+                                                <div *ngIf="submitted && input.get('amount').errors || input.get('amount').invalid && (input.get('amount').dirty || input.get('amount').touched)"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="input.get('amount').errors['required']" class="req">
+                                                        Required
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="border-bottom p-1 td text-center">
+                                                <button class="btn text-center mt-2"
+                                                    (click)="removeInputFeild(input.value.feesHeadId,i)"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-end"><b>Total &nbsp;=</b></td>
+                                            <td class="readonly"><input type="number" readonly class="form-control" formControlName="totalAmount"></td>
+                                        </tr>
+                                        <tr>
+                                            <!-- <button class="btn btn-sm add my-2 d-flex align-items-center" style="font-size: 12px;"
+                                        (click)="addInputFeild()"><i class="fa fa-plus-circle" style="color: blue;font-size: 12px;"></i>
+                                        Add</button> -->
+                                            <button class="btn btn-sm my-2 d-flex align-items-center add"
+                                                style="font-size: 12px;" (click)="addInputFeild()">
+                                                <i class="fa fa-plus-circle" style="font-size: 15px;color: blue;"></i>
+                                                Add
+                                            </button>
+                                            <td colspan="3" class="text-end">
+                                                <button type="button" class="btn btn-md btn-primary update"
+                                                    (click)="onSubmit()"
+                                                    *ngIf="feesHeadForm.value.degreeTypeId && feesHeadForm.value.branchId && !feesHeadForm.value.id">Submit</button>
+                                                <button type="button" class="btn btn-md btn-primary update"
+                                                    (click)="onSubmit()"
+                                                    *ngIf="feesHeadForm.value.degreeTypeId && feesHeadForm.value.branchId && feesHeadForm.value.id">Update</button>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>

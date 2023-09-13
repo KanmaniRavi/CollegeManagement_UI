@@ -1,0 +1,12 @@
+.page-wrapper .sidebar-wrapper .sidebar-menu .sidebar-dropdown>a:after {
+    content: none !important;
+}
+.page-wrapper .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu ul li a:before {
+    content: none !important;
+}
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  .ti, .fas, .fa-solid, .far{
+    background: none !important;
+  }

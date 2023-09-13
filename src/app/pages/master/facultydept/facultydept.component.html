@@ -1,0 +1,94 @@
+<div class="page-wrapper toggled">
+    <main class="page-content bg-light">
+        <div class="container-fluid">
+            <div class="layout-specing">
+                <div class="d-md-flex justify-content-between align-items-center mt-1">
+                    <h5 class="mb-0 text-uppercase">Faculty Department</h5>
+                    <div aria-label="breadcrumb" class="text-end">
+                        <button class="btn btn-md btn-primary" (click)="openModal(content)">Add Faculty Department</button>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-9"></div>
+                    <div class="col-3">
+                        <input class="form-control search" [(ngModel)]="facultyDeptSearch" type="text" id="search"
+                            name="search" autocomplete="off" placeholder="Search Department">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mt-2">
+                        <div class="table-responsive shadow rounded">
+                            <table class="table table-center bg-white mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="border-bottom p-2 text-uppercase">S.No</th>
+                                        <th class="border-bottom p-2 text-uppercase">Department</th>
+                                        <th class="border-bottom p-2 text-uppercase">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of dataValue | master:facultyDeptSearch; let i=index">
+                                        <td class="border-bottom p-1 td">{{i+1}}</td>
+                                        <td class="border-bottom p-1 td">{{data.department}}</td>
+                                        <td class="border-bottom p-1">
+                                            <button class="btn me-2" (click)="onEdit(content,data.id)"><i
+                                                    class="fa-regular fa-pen-to-square"></i></button>
+                                            <button class="btn" (click)="deleteModal(delete,data.id)"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="dataValue.length ==0">
+                                        <td colspan="4" class="text-center"><i class="fa fa-search"></i>
+                                            <p>No Data Found</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title text-uppercase" *ngIf="!facultydeptForm.value.id">Create Faculty Department</h5>
+        <h5 class="modal-title text-uppercase" *ngIf="facultydeptForm.value.id">Update Faculty Department</h5>
+        <button type="button" class="close fa fa-xmark" aria-label="Close"
+            (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="facultydeptForm" class="d-flex flex-column">
+            <div class="rounded d-flex flex-column p-1 my-2">
+                <label for="deptName">Department Name <b class="text-danger">*</b></label>
+                <input formControlName="department" type="text" class="form-control shadow-none"
+                    placeholder="Department Name"
+                    [ngClass]="{ 'is-invalid': submitted && b['department'].errors || b['department'].invalid && (b['department'].dirty || b['department'].touched)}">
+                <div *ngIf="submitted && b['department'].errors || b['department'].invalid && (b['department'].dirty || b['department'].touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="b['department'].errors['required']" class="req">Required</div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" *ngIf="facultydeptForm.value.id" (click)="update(modal)">Update</button>
+        <button class="btn btn-primary" *ngIf="!facultydeptForm.value.id" (click)="onSubmit(modal)">Submit</button>
+    </div>
+</ng-template>
+<ng-template #delete let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title text-uppercase">Delete Faculty Department</h5>
+        <button class="close fa fa-xmark" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body delete">
+        <p>
+            <strong>Are you sure want to delete ?</strong>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <!-- <button class="btn btn-sm btn-danger" (click)="modal.dismiss('cancel click')">Cancel</button> -->
+        <button class="btn btn-sm btn-primary" (click)="onDelete(modal)">Ok</button>
+    </div>
+</ng-template>

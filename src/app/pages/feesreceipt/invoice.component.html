@@ -1,0 +1,122 @@
+<div class="page-wrapper toggled">
+    <main class="page-content bg-light">
+        <div class="container-fluid">
+            <div class="layout-specing">
+                <div class="d-md-flex justify-content-between align-items-center d-print-none mb-0">
+                    <h5 class="mb-0 text-uppercase">Fees Receipt</h5>
+                    <button class="btn btn-primary btn-md me-2" (click)="pdfDownload(pdf)">
+                        <i class="fa fa-file-pdf-o me-2" aria-hidden="true"></i>Download
+                    </button>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <h5 class="text-center text-uppercase">Fees Details </h5>
+                        <div class="card rounded shadow px-3 pt-3">
+                            <div class="row mb-0">
+                                <div class="col-xl-8 col-md-8 order-2 order-md-1">
+                                    <dl class="row">
+                                        <dt class="col-md-3 col-5 fw-normal" style="font-size: 14px;"><b>Receipt No
+                                                :</b></dt>
+                                        <dd class="col-md-9 col-7" style="font-size: 14px;">{{dataValue.receiptNo}}</dd>
+                                        <dt class="col-md-3 col-5 fw-normal" style="font-size: 14px;"><b>Student
+                                                Name:</b></dt>
+                                        <dd class="col-md-9 col-7" style="font-size: 14px;">
+                                            {{dataValue.studentFullName}}
+                                        </dd>
+                                        <dt class="col-md-3 col-5 fw-normal" style="font-size: 14px;"><b>Department
+                                                :</b></dt>
+                                        <dd class="col-md-9 col-7" style="font-size: 14px;">{{dataValue.degree}}</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-xl-4 col-md-4 order-md-2 order-1 mt-2 mt-sm-0">
+                                    <dl class="row mb-0">
+                                        <dt class="col-md-5 col-5 fw-normal" style="font-size: 14px;"><b>Receipt
+                                                Date:</b></dt>
+                                        <dd class="col-md-7 col-7" style="font-size: 14px;">{{dataValue.receiptDate}}
+                                        </dd>
+                                        <dt class="col-md-5 col-5 fw-normal" style="font-size: 14px;"><b>Roll No:</b>
+                                        </dt>
+                                        <dd class="col-md-7 col-7" style="font-size: 14px;">{{dataValue.rollNo}}</dd>
+                                        <dt class="col-md-5 col-5 fw-normal" style="font-size: 14px;"><b>Branch :</b>
+                                        </dt>
+                                        <dd class="col-md-7 col-7" style="font-size: 14px;">{{dataValue.branchName}}
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="invoice-table pb-4 mt-3">
+                            <div class="table-responsive bg-white shadow rounded">
+                                <table class="table mb-0 table-center invoice-tb">
+                                    <thead class="color">
+                                        <tr>
+                                            <th scope="col" class="border-bottom text-start p-2 text-uppercase">No</th>
+                                            <th scope="col" class="border-bottom text-start p-2 text-uppercase">Fees
+                                                Head</th>
+                                            <th scope="col" class="border-bottom text-center p-2 text-uppercase">Amount
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let student of dataValue.feesHistoryComponent; let i = index">
+                                            <th scope="row" class="text-start p-1 no">{{i+1}}</th>
+                                            <td class="text-start p-1 td">{{student.feesHeadName}}</td>
+                                            <td class="text-center p-1 td">{{student.amounts}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-5 mx-auto ml-5">
+                                    <ul class="list-unstyled h6 fw-normal mt-4 mb-0 ms-md-5 ms-lg-4">
+                                        <li class="d-flex justify-content-between" style="font-weight: 600;">Total Payable
+                                            :<span>{{amount}}
+                                            </span></li>
+                                        <li class="d-flex justify-content-between" style="font-weight: 600;">Paid Amount
+                                            :<span>
+                                                {{amount}}</span></li>
+                                        <li class="d-flex justify-content-between" style="font-weight: 600;">Balance :<span>0</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="invoice-footer border-top pt-4">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="text-sm-start text-muted text-center">
+                                        <h6 class="mb-0">Collected By : <span class="text-warning">{{userName}}</span>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="text-sm-end text-muted text-center">
+                                        <h6 class="mb-0">Generater On :<span
+                                                class="text-primary">{{dataValue.receiptDate}}</span></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-end">
+                            <a href="javascript:window.print()" class="btn btn-icon btn-soft-primary d-print-none"><i
+                                    class="ti ti-printer"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<ng-template #pdf let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title text-uppercase">PDF View</h5>
+        <div class="ml-auto">
+            <button class="btn btn-md btn-primary me-2" aria-label="Close" (click)="download(modal)">Download</button>
+            <button class="close fa fa-xmark m1-2" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+    </div>
+    <div class="modal-body pdf">
+        <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
+            style="width: 100%; height: 600px"></pdf-viewer>
+    </div>
+</ng-template>

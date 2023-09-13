@@ -1,0 +1,50 @@
+<div class="page-wrapper toggled">
+    <main class="bg-light">
+        <div class="mt-2">
+            <div class="row mt-2">
+                <div class="col-12 body">
+                    <div class="card border-0">
+                        <div class="d-md-flex justify-content-between p-3 shadow rounded-top align-items-center">
+                            <h5 class="mb-0 text-uppercase list">Faculties</h5>
+                        </div>
+                        <div class="table-responsive shadow rounded">
+                            <table class="table table-center bg-white">
+                                <thead>
+                                    <tr>
+                                        <th class="border-bottom p-2 text-uppercase">S.No</th>
+                                        <th class="border-bottom p-2 text-uppercase">Name</th>
+                                        <th class="border-bottom p-2 text-uppercase">Department</th>
+                                        <th class="border-bottom p-2 text-uppercase">Email</th>
+                                        <th class="border-bottom p-2 text-uppercase">Phone No</th>
+                                        <th class="border-bottom p-2 text-uppercase">Status</th>
+                                        <th class="border-bottom p-2 text-uppercase">Joining Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of values; let i=index">
+                                        <th class="border-bottom p-2 td">{{i+1}}</th>
+                                        <td class="border-bottom p-2 data">{{data.firstName}}</td>
+                                        <td class="border-bottom p-2 data">{{data.department}}</td>
+                                        <td class="border-bottom p-2 data">{{data.email}}</td>
+                                        <td class="border-bottom p-2 data">{{data.phoneNum}}</td>
+                                        <td class="border-bottom p-2 data">
+                                            <div class="badge rounded" [ngClass]="{'bg-soft-success' : data.status === 'ACTIVE' , 'bg-soft-danger' : data.status === 'INACTIVE' }">
+                                                {{data.status}}
+                                            </div>
+                                        </td>
+                                        <td class="border-bottom p-1 data">{{data.joiningDate}}</td>
+                                    </tr>
+                                    <tr *ngIf="dataValue.length ==0">
+                                        <td colspan="6" class="text-center"><i class="fa fa-search"></i>
+                                            <p>No Data Found</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

@@ -1,0 +1,152 @@
+.card {
+    width: 100%;
+}
+
+.col-md-1 {
+    white-space: nowrap;
+}
+
+.register {
+    width: 100% !important;
+    height: calc(1.2em + 0.75rem + 2px);
+}
+
+thead {
+    background-color: rgb(171 209 247) !important;
+}
+
+h2,
+h3 {
+    font-size: 18px !important;
+}
+
+.btn {
+    padding: 0.1rem 0.2rem !important;
+    font-size: 12px;
+}
+
+.card .card-body {
+    padding: 1rem !important;
+}
+
+.details {
+    border: 1px solid rgba(0, 0, 0, .125) !important;
+}
+
+hr {
+    border: 1px solid rgba(0, 0, 0, .125) !important;
+    margin-top: 0px !important;
+    margin-bottom: 0.5rem;
+}
+
+.dl {
+    margin-bottom: 0px !important;
+}
+
+.card .card-body {
+    padding: 0.5rem !important;
+}
+
+.stud {
+    border-top-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+}
+
+p {
+    margin-bottom: 0px !important;
+}
+
+.pay {
+    font-size: 14px !important;
+    padding: 0.6rem 0.3rem !important;
+}
+
+.req {
+    font-size: 10px !important;
+    color: red;
+}
+
+label {
+    margin-bottom: 0rem !important;
+}
+
+.modal-header {
+    padding: 0.4rem 0.5rem !important;
+}
+
+.modal-body {
+    padding: 0.5rem !important;
+}
+
+.modal-footer {
+    padding: 0.2rem !important;
+}
+
+.modal-header .close {
+    margin: -0.6rem -1rem -1rem auto !important;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.ng-autocomplete {
+    width: 100%;
+}
+
+.ng-autocomplete ::ng-deep .autocomplete-container {
+    box-shadow: none;
+}
+
+.ng-autocomplete ::ng-deep .autocomplete-container ::ng-deep .input-container ::ng-deep input {
+    font-size: 0.875rem;
+    display: block;
+    height: 2rem;
+    padding: 0.3rem 0.2rem;
+    font-weight: 400;
+    line-height: 1.52857143;
+    color: #495057;
+    border: 1px solid #dde6e9;
+    border-radius: 0.25rem;
+}
+
+.ng-autocomplete ::ng-deep .autocomplete-container ::ng-deep .suggestions-container ::ng-deep .item ::ng-deep .row {
+    padding: 0.5rem 1rem;
+}
+
+.ng-autocomplete ::ng-deep .autocomplete-container ::ng-deep .not-found {
+    border: 0;
+}
+
+.search {
+    padding-left: 0 !important;
+}
+
+.no {
+    padding-right: 0 !important;
+}
+
+.the-legend {
+    position: relative;
+    bottom: 12px;
+    left: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0;
+    width: auto;
+    padding: 6px 10px;
+    background: white;
+    border: 1px solid #e0e0e0;
+}
+
+.td {
+    padding-left: 15px !important;
+}
+
+.data {
+    padding-left: 10px !important;
+}
+
+::ng-deep .autocomplete-container .input-container .x i {
+    vertical-align: baseline !important;
+}

@@ -1,0 +1,128 @@
+<div class="page-wrapper toggled">
+    <main class="page-content bg-light">
+        <div class="container-fluid">
+            <div class="layout-specing">
+                <div class="d-flex justify-content-between">
+                    <h5 class="text-uppercase">Fees Collection</h5>
+                </div>
+                <form [formGroup]="feeForm" class="mt-2">
+                    <div class="card shadow rounded">
+                        <div class="row d-flex align-items-center py-3 px-2">
+                            <div class="col-12 col-sm-12 col-md-1 no">
+                                <label for="serach" style="font-size: 14px;">Roll No </label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4 search mt-2">
+                                <ng-autocomplete [data]="feesArr" [searchKeyword]="keyword" placeholder="Search Roll No"
+                                    (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+                                    (inputCleared)="inputCleared($event)" (input)="onInput($event)"
+                                    [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                                </ng-autocomplete>
+                                <ng-template #itemTemplate let-item>
+                                    <a [innerHTML]="item.rollNo"></a>
+                                </ng-template>
+                                <ng-template #notFoundTemplate let-notFound>
+                                    <div [innerHTML]="notFound"></div>
+                                </ng-template>
+                            </div>
+                            <!-- <div class="col-12 col-sm-12 col-md-2"><button class="btn btn-sm btn-primary text-center ml-2"
+                                (click)="reset()">Reset</button></div> -->
+                        </div>
+                    </div>
+                </form>
+                <div class="d mt-4" *ngIf="studentDetails">
+                    <div class="card shadow rounded py-2 px-2">
+                        <div class="the-fieldset">
+                            <legend class="the-legend"><b>Student Details</b></legend>
+                        </div>
+                        <div class="row px-4">
+                            <div class="col">
+                                <label>Student Name &nbsp;&nbsp;:&nbsp;&nbsp;
+                                    <span>{{studentDetails.fullName}}</span>
+                                </label>
+                            </div>
+                            <div class="col">
+                                <label>Degree &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
+                                    <span>{{studentDetails.degree}}</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row mt-2 px-4">
+                            <div class="col">
+                                <label>Roll No
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
+                                    <span>{{studentDetails.rollNo}}</span>
+                                </label>
+                            </div>
+                            <div class="col">
+                                <label>Department &nbsp;&nbsp;:&nbsp;&nbsp;
+                                    <span>{{studentDetails.branchName}}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card details rounded border-0 mt-3">
+                        <div class="card">
+                            <div class="invoice-table pb-4">
+                                <div class="table-responsive bg-white rounded">
+                                    <table class="table mb-0 table-center invoice-tb">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th scope="col" class="border-bottom text-start p-2 text-uppercase">No.
+                                                </th>
+                                                <th scope="col" class="border-bottom text-start p-2 text-uppercase">Fees
+                                                    Catagery
+                                                </th>
+                                                <th scope="col" class="border-bottom text-center p-2 text-uppercase">
+                                                    Amount
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let student of studentDetails.feesHead; let i = index">
+                                                <th scope="row" class="text-start td">{{i+1}}</th>
+                                                <td class="text-start data">{{student.feesHeadName}}</td>
+                                                <td class="text-center">{{student.amount}}</td>
+                                            </tr>
+                                            <tr style="border-top: 2px solid #dee2e6;border-bottom: 2px solid #dee2e6;">
+                                                <td></td>
+                                                <td class="text-start"><b>Total</b></td>
+                                                <td class="text-center"><b>{{studentDetails.totalPayable}}</b></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-12 text-center">
+                                        <button class="btn pay btn-md btn-primary mr-3 mt-2"
+                                            (click)="confirmOpen(confirm, studentDetails)">Initiate Payment &nbsp;<i
+                                                class="fa fa-inr"
+                                                aria-hidden="true"></i>&nbsp;{{studentDetails.totalPayable}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="mt-4 text-end">
+                <a href="javascript:window.print()" class="btn btn-icon btn-soft-primary d-print-none"><i
+                        class="ti ti-printer"></i></a>
+            </div> -->
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<ng-template #confirm let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title text-uppercase">Confirm Pay</h5>
+        <button class="close fa fa-xmark" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <p>
+            <strong>Are you sure want to Pay ?</strong>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-sm btn-danger" (click)="modal.dismiss('cancel click')">Cancel</button>
+        <button class="btn btn-sm btn-primary" (click)="confirmPay(modal)">Ok</button>
+    </div>
+</ng-template>

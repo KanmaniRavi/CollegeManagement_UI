@@ -1,0 +1,262 @@
+<div class="page-wrapper toggled">
+    <main class="page-content bg-light">
+        <div class="container-fluid">
+            <div class="layout-specing">
+                <div>
+                    <h5 class="mb-0 dash text-uppercase">Dashboard</h5>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6">
+                        <div class="card rounded shadow mt-3 card1">
+                            <div class="the-fieldset">
+                                <legend class="the-legend bg-success"><b>Account Statistics</b></legend>
+                            </div>
+                            <div class="rows table-responsive px-3">
+                                <div class="row">
+                                    <div class="col-5"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-6">
+                                        <b style="font-size: 18px;">Collection Amounts</b>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 15px;">
+                                    <div class="col-5">
+                                        <h3 class="text-primary">Weekly Amount</h3>
+                                    </div>
+                                    <div class="col-2">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-5 text-center">
+                                        <p>{{dataValue.weeklyAmount}}</p>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 15px;">
+                                    <div class="col-5">
+                                        <h3 class="text-danger">Monthly Amount</h3>
+                                    </div>
+                                    <div class="col-2">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-5 text-center">
+                                        <p>{{dataValue.monthlyAmount}}</p>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 15px;">
+                                    <div class="col-5">
+                                        <h3 class="text-success">Yearly Amount</h3>
+                                    </div>
+                                    <div class="col-2">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-5 text-center">
+                                        <p>{{dataValue.yearlyAmount}}</p>
+                                    </div>
+                                </div>
+                                <!-- <table class="tableFixHead">
+                                    <thead style="width: 100%;">
+                                        <tr>
+                                            <th style="width: 10%;" class="p-2 text-uppercase th">Degree</th>
+                                            <th class="p-2 text-uppercase th">Department</th>
+                                            <th style="width: 30%;" class="p-2 text-uppercase th"> Weekly </th>
+                                            <th style="width: 30%;" class="p-2 text-uppercase th"> Monthly </th>
+                                            <th style="width: 30%;" class="p-2 text-uppercase th">Yearly </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr *ngFor="let value of collection;">
+                                            <td>{{ value.department }}</td>
+                                            <td>{{ value.branch }}</td>
+                                            <td>{{ value.weeklyAmount }}</td>
+                                            <td>{{ value.monthlyAmount }}</td>
+                                            <td>{{ value.yearlyAmount }}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6">
+                        <div class="card rounded shadow mt-3 card1">
+                            <div class="the-fieldset">
+                                <legend class="the-legend bg-danger"><b>Students Statistics</b></legend>
+                            </div>
+                            <div class="rows row1 table-responsive">
+                                <table class="table tableFixHead">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="p-2 text-uppercase th">Degree Type</th>
+                                            <th scope="col" class="p-2 text-uppercase th">Degree</th>
+                                            <th scope="col" class="p-2 text-uppercase th">Department</th>
+                                            <th scope="col" class="p-2 text-uppercase th">Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      
+                                        <ng-container *ngFor="let degreeType of getDepartmentKeys()">
+                                            <ng-container *ngIf="degreeType === 'UG'">
+                                                <ng-container *ngFor="let degree of getDegreeKeys(degreeType)">
+                                                    <ng-container *ngFor="let department of data[degreeType][degree]">
+                                                        <tr class="border-bottom">
+                                                            <td *ngIf="getDegreeKeys(degreeType).indexOf(degree) === 0"
+                                                                [attr.rowspan]="getRowCount(degreeType)" [ngStyle]="{ 'max-height': '50px' }">
+                                                                {{ degreeType }}
+                                                            </td>
+                                                            <td>{{ degree }}</td>
+                                                            <td>{{ getSpecializationKey(department) }}</td>
+                                                            <td>{{ getSpecializationCount(department) }}</td>
+                                                        </tr>
+                                                    </ng-container>
+                                                </ng-container>
+                                            </ng-container>
+                                        </ng-container>
+                                        <ng-container *ngFor="let degreeType of getDepartmentKeys()">
+                                            <ng-container *ngIf="degreeType === 'PG'">
+                                                <ng-container *ngFor="let degree of getDegreeKeys(degreeType)">
+                                                    <ng-container *ngFor="let department of data[degreeType][degree]">
+                                                        <tr class="border-bottom">
+                                                            <td *ngIf="getDegreeKeys(degreeType).indexOf(degree) === 0"
+                                                                [attr.rowspan]="getRowCount(degreeType)" [ngStyle]="{ 'max-height': '50px' }">
+                                                                {{ degreeType }}
+                                                            </td>
+                                                            <td>{{ degree }}</td>
+                                                            <td>{{
+                                                                getSpecializationKey(department) }}</td>
+                                                            <td>{{ getSpecializationCount(department) }}</td>
+                                                        </tr>
+                                                    </ng-container>
+                                                </ng-container>
+                                            </ng-container>
+                                        </ng-container>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12 col-sm-12 col-md-6">
+                        <div class="card rounded shadow mt-3 card2">
+                            <div class="the-fieldset">
+                                <legend class="the-legend bg-warning"><b>Recent Bills</b></legend>
+                            </div>
+                            <div class="rows table-responsive">
+                                <table class="tableFixHead">
+                                    <thead>
+                                        <tr>
+                                            <!-- <th style="width: 5%;" class="border-bottom p-2 text-uppercase">S.No</th> -->
+                                            <th class="p-2 text-uppercase th" style="width: 30%;">student Name
+                                            </th>
+                                            <th class="p-2 text-uppercase th" style="width: 25%;">Receipt No
+                                            </th>
+                                            <th class="p-2 text-uppercase th" style="width: 25%;">Receipt
+                                                Date
+                                            </th>
+                                            <th class="p-2 text-uppercase th" style="width: 20%;">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let fees of dataValues; let i=index" class="mt-2">
+                                            <!-- <th class="p-1 no">{{i+1}}</th> -->
+                                            <td class="p-1"> {{fees.studentFullName}}</td>
+                                            <td class="p-1">{{fees.receiptNo}}</td>
+                                            <td class="p-1">{{fees.receiptDate}}</td>
+                                            <td class="p-1">{{fees.feesHistoryComponent[0].totalPayables}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6">
+                        <div class="card rounded shadow mt-3 card2">
+                            <div class="the-fieldset">
+                                <legend class="the-legend"><b>History</b></legend>
+                            </div>
+                            <div class="rows table-responsive">
+                                <table class="tableFixHead">
+                                    <thead>
+                                        <tr>
+                                            <!-- <th style="width: 20%;" class="p-2 text-uppercase th">S.No</th> -->
+                                            <th style="width: 40%;" class="p-2 text-uppercase th">Department
+                                            </th>
+                                            <th style="width: 60%;" class="p-2 text-uppercase th">Current Year Collection</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let fees of dept | keyvalue; let i=index">
+                                            <!-- <td> {{i+1}}</td> -->
+                                            <td> {{fees.key}}</td>
+                                            <td>{{fees.value}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+
+
+
+
+
+
+<!-- <div class="page-wrapper toggled">
+    <main class="page-content bg-light">
+        <div class="container-fluid">
+            <div class="layout-specing">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <h5 class="mb-0 dash text-uppercase">Dashboard</h5>
+                    </div>
+                </div>
+                <div class="row row-cols-xl-2 row-cols-md-2 row-cols-1">
+                    <div class="col mt-2">
+                        <div class="card faculty">
+                            <a routerLink="facultylist"
+                                class="features bg-success d-flex justify-content-between align-items-center rounded shadow p-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon text-center rounded-pill">
+                                        <i class="fa-solid fa-user-secret fs-4 mb-0"></i>
+                                    </div>
+                                    <div class="flex-1 ms-3">
+                                        <h6 class="mb-0">Faculties</h6>
+                                        <p class="fs-5 fw-bold mb-0"><span class="counter-value"
+                                                data-target="145">{{dataValue.length}}</span></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col mt-2">
+                        <div class="card student">
+                            <a routerLink="studentlist"
+                                class="features bg-primary d-flex justify-content-between align-items-center rounded shadow p-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon text-center rounded-pill">
+                                        <i class='fas fa-book-reader fs-4 mb-0'></i>
+                                    </div>
+                                    <div class="flex-1 ms-3">
+                                        <h6 class="mb-0">Students</h6>
+                                        <p class="fs-5 fw-bold mb-0"><span class="counter-value"
+                                                data-target="9">{{dataValues.length}}</span></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 mt-4">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </main>
+</div> -->
